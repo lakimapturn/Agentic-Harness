@@ -1,0 +1,21 @@
+dataset: dataset.json
+fields:
+  id: case
+  prompt: instruction
+  image: container_image
+default_image: python:3.11-slim
+setup:
+  command: [python, prepare.py, "{task_id}", --workspace, "{workspace}"]
+  runtime: container
+verifier:
+  command: [python, grade.py, "{task_id}", --workspace, "{workspace}"]
+  runtime: container
+  result: json
+  allowed_exit_codes: [0]
+submission_paths: [answer.txt]
+hide_from_agent: [private]
+protected_paths: [private]
+timeouts:
+  setup: 30
+  agent: 30
+  verifier: 30

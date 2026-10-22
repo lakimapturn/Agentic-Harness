@@ -18,6 +18,9 @@ test = ["pytest>=7.0"]
 [project.scripts]
 harness = "agentic_harness.cli:main"
 
+[project.entry-points."agentic_harness.agents"]
+"agents/trial-agent" = "agentic_harness.agents.trial:TrialAgent"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

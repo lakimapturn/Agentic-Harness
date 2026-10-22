@@ -139,6 +139,18 @@ harness run --agent agents/mini-swe-agent \
 
 This executes the task directly without requiring Redis or background workers.
 
+### Optional: Trial Extension Smoke Test
+
+The repository includes `trial-benchmark` and `agents/trial-agent` as obvious dummy extensions. The benchmark uses a new dataset field mapping and the existing configuration-driven adapter. The agent is registered through a Python entry point and executes each task's shell instruction inside its Docker container; it makes no LLM calls. Use it only with trusted trial prompts.
+
+After `make install`, run both trial tasks synchronously:
+
+```bash
+harness run --agent agents/trial-agent --benchmark trial-benchmark --sync
+```
+
+With Redis, the dispatcher, and workers running, omit `--sync` to exercise the queue path. Neither extension requires changes to the task executor.
+
 ## Technical Writeup
 
 The harness separates benchmark definitions, agent integration, environment management, and verification. This section explains the design choices and their tradeoffs.

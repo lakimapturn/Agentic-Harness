@@ -1,0 +1,13 @@
+[
+  {
+    "case": "trial-001",
+    "instruction": "test ! -e private && printf 'trial-one' > answer.txt",
+    "expected": "trial-one",
+    "container_image": "python:3.11-slim"
+  },
+  {
+    "case": "trial-002",
+    "instruction": "test ! -e private && printf 'trial-two' > answer.txt",
+    "expected": "trial-two"
+  }
+]
