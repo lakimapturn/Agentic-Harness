@@ -1,0 +1,20 @@
+dataset: dataset.json
+fields:
+  id: id
+  prompt: prompt
+  image: docker_image
+default_image: python:3.11-slim
+setup:
+  command: [python, prepare.py, "{task_id}", --workspace, "{workspace}"]
+  runtime: container
+verifier:
+  command: [python, grade.py, "{task_id}", --workspace, "{workspace}"]
+  runtime: container
+  result: json
+  allowed_exit_codes: [0]
+submission_paths: ["{solution_file}"]
+hide_from_agent: [test_solution.py]
+timeouts:
+  setup: 180
+  agent: 600
+  verifier: 120

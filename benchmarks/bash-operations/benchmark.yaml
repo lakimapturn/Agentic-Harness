@@ -1,0 +1,20 @@
+dataset: dataset.json
+fields:
+  id: task_id
+  prompt: problem_statement
+  image: docker_image
+default_image: alpine:latest
+setup:
+  command: [python, setup.py, --workspace-dir, "{workspace}", --task, "{task_id}"]
+  runtime: host
+verifier:
+  command: [python, evaluate.py, --workspace-dir, "{workspace}", --task, "{task_id}"]
+  runtime: container
+  image: python:3.11-slim
+  result: json
+  allowed_exit_codes: [0, 1]
+submission_paths: ["."]
+timeouts:
+  setup: 120
+  agent: 600
+  verifier: 120
